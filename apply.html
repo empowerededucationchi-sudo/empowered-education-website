@@ -1,0 +1,824 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Apply | Empowered Education</title>
+  <meta name="description" content="Apply to the Bridge Mentoring Program, Capital Workshop, or volunteer as a mentor or career professional with Empowered Education.">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    .apply-hero { padding: 5rem 2rem 2.5rem; border-bottom: 1px solid var(--gray-border); max-width: 900px; margin: 0 auto; }
+    .tab-row { display: flex; gap: 0; border-bottom: 1px solid var(--gray-border); max-width: 900px; margin: 0 auto; overflow-x: auto; }
+    .tab { padding: 1rem 1.5rem; font-size: 13px; font-weight: 500; color: var(--gray-mid); cursor: pointer; border-bottom: 2px solid transparent; white-space: nowrap; background: none; border-top: none; border-left: none; border-right: none; transition: color .2s, border-color .2s; }
+    .tab:hover { color: var(--gray-dark); }
+    .tab.active { color: var(--gray-dark); border-bottom-color: var(--purple); }
+    .form-panel { display: none; max-width: 900px; margin: 0 auto; padding: 2.5rem 2rem; }
+    .form-panel.active { display: block; }
+    .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .form-group { display: flex; flex-direction: column; gap: .375rem; }
+    .form-group.full { grid-column: 1 / -1; }
+    label { font-size: 12px; font-weight: 600; color: var(--gray-dark); letter-spacing: .02em; }
+    label .req { color: var(--purple); margin-left: 2px; }
+    input, select, textarea {
+      border: 1px solid var(--gray-border); border-radius: 8px; padding: 10px 14px;
+      font-size: 14px; color: var(--gray-dark); background: white; font-family: inherit;
+      transition: border-color .2s, box-shadow .2s; width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: none; border-color: var(--purple);
+      box-shadow: 0 0 0 3px rgba(83,74,183,.1);
+    }
+    textarea { resize: vertical; min-height: 100px; }
+    select { appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%236B6960' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; padding-right: 36px; }
+    .checkbox-group { display: flex; flex-direction: column; gap: .5rem; margin-top: .25rem; }
+    .checkbox-item { display: flex; align-items: flex-start; gap: 10px; font-size: 13px; color: var(--gray-mid); line-height: 1.5; }
+    .checkbox-item input[type=checkbox] { width: 16px; min-width: 16px; height: 16px; margin-top: 2px; accent-color: var(--purple); cursor: pointer; border-radius: 3px; }
+    .section-divider { font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase; color: var(--purple); margin: 1.75rem 0 1rem; padding-bottom: .5rem; border-bottom: 1px solid var(--gray-border); grid-column: 1 / -1; }
+    .form-note { font-size: 12px; color: var(--gray-mid); line-height: 1.6; background: var(--gray-light); border-radius: 8px; padding: .75rem 1rem; grid-column: 1 / -1; }
+    .submit-row { margin-top: 2rem; display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+    .btn-submit { background: var(--purple); color: white; border: none; border-radius: 8px; padding: 12px 28px; font-size: 14px; font-weight: 600; cursor: pointer; font-family: inherit; transition: background .2s, transform .15s; }
+    .btn-submit:hover { background: #3f37a0; transform: translateY(-1px); }
+    .btn-submit:disabled { background: var(--gray-mid); cursor: not-allowed; transform: none; }
+    .submit-note { font-size: 12px; color: var(--gray-mid); }
+    .success-msg { display: none; background: #E1F5EE; border: 1px solid #5DCAA5; border-radius: 12px; padding: 2rem; text-align: center; margin-top: 1.5rem; }
+    .success-msg h3 { color: var(--teal); font-size: 18px; margin-bottom: .5rem; }
+    .success-msg p { font-size: 14px; color: var(--gray-mid); }
+    .program-card { border: 1px solid var(--gray-border); border-radius: 12px; padding: 1.5rem; margin-bottom: 1.5rem; display: flex; gap: 1rem; align-items: flex-start; }
+    .program-card-icon { width: 44px; height: 44px; min-width: 44px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 20px; }
+    .program-card h3 { font-size: 15px; font-weight: 600; margin-bottom: .25rem; }
+    .program-card p { font-size: 13px; color: var(--gray-mid); line-height: 1.6; margin-bottom: .75rem; }
+    .program-detail { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .program-detail span { font-size: 11px; color: var(--gray-mid); display: flex; align-items: center; gap: 5px; }
+    .form-header { margin-bottom: 1.75rem; }
+    .form-header h2 { font-size: 20px; font-weight: 600; color: var(--gray-dark); margin-bottom: .375rem; }
+    .form-header p { font-size: 14px; color: var(--gray-mid); line-height: 1.7; }
+    @media (max-width: 640px) {
+      .form-grid { grid-template-columns: 1fr; }
+      .form-group.full { grid-column: 1; }
+      .section-divider { grid-column: 1; }
+      .form-note { grid-column: 1; }
+      .tab { padding: .75rem 1rem; font-size: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Empowered <span>Education</span></a>
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="programs.html">Programs</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="the-problem.html">The Problem</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
+</nav>
+
+<div class="apply-hero">
+  <p class="eyebrow purple">Applications</p>
+  <h1>Apply to our programs</h1>
+  <p>All Empowered Education programs are free to participants. Select the application that matches your role below. We review all applications within 7 business days and respond by email.</p>
+</div>
+
+<!-- Tab navigation -->
+<div class="tab-row" role="tablist">
+  <button class="tab active" role="tab" aria-selected="true"  onclick="showTab('student')">
+    <i class="ti ti-user-check" style="margin-right:6px"></i>Student — Bridge Mentoring
+  </button>
+  <button class="tab" role="tab" aria-selected="false" onclick="showTab('mentor')">
+    <i class="ti ti-school" style="margin-right:6px"></i>College Mentor
+  </button>
+  <button class="tab" role="tab" aria-selected="false" onclick="showTab('workshop')">
+    <i class="ti ti-presentation" style="margin-right:6px"></i>Capital Workshop
+  </button>
+  <button class="tab" role="tab" aria-selected="false" onclick="showTab('shadow')">
+    <i class="ti ti-briefcase" style="margin-right:6px"></i>Career Professional
+  </button>
+</div>
+
+<!-- ══ TAB 1: STUDENT APPLICATION ══ -->
+<div id="tab-student" class="form-panel active">
+  <div class="program-card">
+    <div class="program-card-icon" style="background:#EEEDFE;color:#534AB7"><i class="ti ti-users"></i></div>
+    <div>
+      <h3>Bridge Mentoring Program — Student Application</h3>
+      <p>A semester-long mentoring experience pairing high school seniors with college student mentors and career professionals. You will build your professional network, complete a job shadow, and develop skills that most students don't learn until college.</p>
+      <div class="program-detail">
+        <span><i class="ti ti-calendar"></i> One semester</span>
+        <span><i class="ti ti-map-pin"></i> Chicago region (hybrid)</span>
+        <span><i class="ti ti-coin"></i> Free</span>
+        <span><i class="ti ti-school"></i> Grades 11–12</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="form-student" onsubmit="submitForm(event, 'student')">
+    <div class="form-grid">
+
+      <div class="section-divider">Personal information</div>
+
+      <div class="form-group">
+        <label for="s-fname">First name <span class="req">*</span></label>
+        <input type="text" id="s-fname" name="first_name" required placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label for="s-lname">Last name <span class="req">*</span></label>
+        <input type="text" id="s-lname" name="last_name" required placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label for="s-email">Email address <span class="req">*</span></label>
+        <input type="email" id="s-email" name="email" required placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="s-phone">Phone number <span class="req">*</span></label>
+        <input type="tel" id="s-phone" name="phone" required placeholder="(312) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="s-dob">Date of birth <span class="req">*</span></label>
+        <input type="date" id="s-dob" name="dob" required>
+      </div>
+      <div class="form-group">
+        <label for="s-grade">Current grade <span class="req">*</span></label>
+        <select id="s-grade" name="grade" required>
+          <option value="">Select grade</option>
+          <option>11th grade (Junior)</option>
+          <option>12th grade (Senior)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s-school">High school name <span class="req">*</span></label>
+        <input type="text" id="s-school" name="school" required placeholder="Name of your high school">
+      </div>
+      <div class="form-group">
+        <label for="s-city">City / neighborhood <span class="req">*</span></label>
+        <input type="text" id="s-city" name="city" required placeholder="Chicago neighborhood or suburb">
+      </div>
+
+      <div class="section-divider">Parent / guardian information</div>
+
+      <div class="form-group">
+        <label for="s-pgname">Parent / guardian full name <span class="req">*</span></label>
+        <input type="text" id="s-pgname" name="guardian_name" required placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label for="s-pgrel">Relationship to you <span class="req">*</span></label>
+        <select id="s-pgrel" name="guardian_relationship" required>
+          <option value="">Select relationship</option>
+          <option>Parent</option>
+          <option>Legal guardian</option>
+          <option>Grandparent</option>
+          <option>Other family member</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="s-pgemail">Parent / guardian email <span class="req">*</span></label>
+        <input type="email" id="s-pgemail" name="guardian_email" required placeholder="guardian@email.com">
+      </div>
+      <div class="form-group">
+        <label for="s-pgphone">Parent / guardian phone <span class="req">*</span></label>
+        <input type="tel" id="s-pgphone" name="guardian_phone" required placeholder="(312) 555-0100">
+      </div>
+
+      <div class="section-divider">Career interests & goals</div>
+
+      <div class="form-group full">
+        <label for="s-career">What careers or fields are you curious about? <span class="req">*</span></label>
+        <input type="text" id="s-career" name="career_interests" required placeholder="e.g. medicine, law, business, social work, technology, education...">
+      </div>
+      <div class="form-group full">
+        <label for="s-goals">What do you hope to get out of this program? <span class="req">*</span></label>
+        <textarea id="s-goals" name="goals" required placeholder="Tell us what you're looking for — professional connections, college guidance, career exploration, confidence, all of the above..."></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="s-statement">Tell us about yourself <span class="req">*</span></label>
+        <textarea id="s-statement" name="personal_statement" required style="min-height:140px" placeholder="Who are you? What are you working toward? What would it mean for you to have a mentor right now? There's no wrong answer — we want to hear your voice."></textarea>
+      </div>
+
+      <div class="section-divider">Availability & commitment</div>
+
+      <div class="form-group full">
+        <label>I understand and agree to the following commitments <span class="req">*</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="commit1" required>
+            I will attend the program orientation session at the start of the semester
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="commit2" required>
+            I will meet with my mentor at least once per month using the program's structured guides
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="commit3" required>
+            I will complete at least one job shadow experience during the program
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="commit4" required>
+            I will complete my professional profile (LinkedIn, resume, email) by the end of the semester
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="commit5" required>
+            I understand that attendance and engagement are required — this is not a program where I can show up occasionally
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="s-avail">What days and times are you generally available? <span class="req">*</span></label>
+        <textarea id="s-avail" name="availability" required placeholder="e.g. Weekday evenings after 5pm, Saturday mornings — let us know what works best for you"></textarea>
+      </div>
+
+      <div class="section-divider">Final questions</div>
+
+      <div class="form-group full">
+        <label for="s-heard">How did you hear about Empowered Education? <span class="req">*</span></label>
+        <select id="s-heard" name="heard_from" required>
+          <option value="">Select one</option>
+          <option>School counselor or teacher</option>
+          <option>Friend or family member</option>
+          <option>Social media</option>
+          <option>Google search</option>
+          <option>Community organization</option>
+          <option>College or university</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="s-anything">Is there anything else you want us to know?</label>
+        <textarea id="s-anything" name="additional_info" placeholder="Anything at all — circumstances, questions, things you want us to consider"></textarea>
+      </div>
+
+      <div class="form-note">
+        <strong>Privacy note:</strong> Your information is collected solely for program application purposes and stored securely in our internal database. We do not sell or share your data with third parties. Parents and guardians of accepted students will receive a separate consent form before the program begins.
+      </div>
+
+    </div><!-- end form-grid -->
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit" id="submit-student">Submit application</button>
+      <p class="submit-note">We review all applications within 7 business days and respond by email.</p>
+    </div>
+
+    <div class="success-msg" id="success-student">
+      <i class="ti ti-circle-check" style="font-size:36px;color:#0F6E56;display:block;margin-bottom:.75rem"></i>
+      <h3>Application received!</h3>
+      <p>Thank you for applying to the Bridge Mentoring Program. We will review your application and respond to <strong id="student-email-confirm"></strong> within 7 business days. Check your spam folder if you don't hear from us.</p>
+    </div>
+  </form>
+</div>
+
+<!-- ══ TAB 2: COLLEGE MENTOR APPLICATION ══ -->
+<div id="tab-mentor" class="form-panel">
+  <div class="program-card">
+    <div class="program-card-icon" style="background:#EEEDFE;color:#534AB7"><i class="ti ti-school"></i></div>
+    <div>
+      <h3>Bridge Mentoring Program — College Mentor Application</h3>
+      <p>Mentor a high school junior or senior through a structured semester-long program. You'll meet monthly, guide them through professional development milestones, and help them navigate the college-to-career transition you recently made yourself.</p>
+      <div class="program-detail">
+        <span><i class="ti ti-calendar"></i> One semester</span>
+        <span><i class="ti ti-clock"></i> ~2–4 hrs/month</span>
+        <span><i class="ti ti-coin"></i> Volunteer (unpaid)</span>
+        <span><i class="ti ti-certificate"></i> Resume-worthy</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="form-mentor" onsubmit="submitForm(event, 'mentor')">
+    <div class="form-grid">
+
+      <div class="section-divider">Personal information</div>
+
+      <div class="form-group">
+        <label for="m-fname">First name <span class="req">*</span></label>
+        <input type="text" id="m-fname" name="first_name" required placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label for="m-lname">Last name <span class="req">*</span></label>
+        <input type="text" id="m-lname" name="last_name" required placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label for="m-email">Email address <span class="req">*</span></label>
+        <input type="email" id="m-email" name="email" required placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="m-phone">Phone number <span class="req">*</span></label>
+        <input type="tel" id="m-phone" name="phone" required placeholder="(312) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="m-college">College / university <span class="req">*</span></label>
+        <input type="text" id="m-college" name="college" required placeholder="Where do you currently attend?">
+      </div>
+      <div class="form-group">
+        <label for="m-year">Year in school <span class="req">*</span></label>
+        <select id="m-year" name="year" required>
+          <option value="">Select year</option>
+          <option>Freshman (1st year)</option>
+          <option>Sophomore (2nd year)</option>
+          <option>Junior (3rd year)</option>
+          <option>Senior (4th year)</option>
+          <option>Graduate student</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="m-major">Major / field of study <span class="req">*</span></label>
+        <input type="text" id="m-major" name="major" required placeholder="e.g. Social Work, Business, Pre-Med...">
+      </div>
+      <div class="form-group">
+        <label for="m-gpa">GPA (optional)</label>
+        <input type="text" id="m-gpa" name="gpa" placeholder="e.g. 3.4">
+      </div>
+
+      <div class="section-divider">Mentoring experience & interests</div>
+
+      <div class="form-group full">
+        <label for="m-careerfields">What career fields can you speak to from personal experience? <span class="req">*</span></label>
+        <input type="text" id="m-careerfields" name="career_fields" required placeholder="e.g. healthcare, education, nonprofit, business, engineering...">
+      </div>
+      <div class="form-group full">
+        <label for="m-why">Why do you want to be a mentor? <span class="req">*</span></label>
+        <textarea id="m-why" name="why_mentor" required placeholder="What brings you to this program? What do you wish someone had told you when you were in high school?"></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="m-experience">Any prior mentoring, tutoring, or youth experience?</label>
+        <textarea id="m-experience" name="prior_experience" placeholder="Programs, jobs, volunteer roles — anything relevant"></textarea>
+      </div>
+
+      <div class="section-divider">Availability & commitment</div>
+
+      <div class="form-group full">
+        <label>I understand and agree to the following <span class="req">*</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="mcommit1" required>
+            I will attend mentor orientation and training before the program begins
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="mcommit2" required>
+            I will meet with my mentee at least once per month using the program's conversation guides
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="mcommit3" required>
+            I will help facilitate at least one job shadow connection for my mentee
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="mcommit4" required>
+            I will complete brief monthly check-ins with the Empowered Education program coordinator
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="mcommit5" required>
+            I understand this is a commitment — I will not abandon my mentee mid-semester
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="m-avail">What days and times are you generally available? <span class="req">*</span></label>
+        <textarea id="m-avail" name="availability" required placeholder="e.g. Weekday evenings, weekend mornings — in-person, virtual, or both?"></textarea>
+      </div>
+
+      <div class="form-group full">
+        <label for="m-heard">How did you hear about Empowered Education? <span class="req">*</span></label>
+        <select id="m-heard" name="heard_from" required>
+          <option value="">Select one</option>
+          <option>Professor or advisor</option>
+          <option>Friend or classmate</option>
+          <option>Campus announcement</option>
+          <option>Social media</option>
+          <option>Google search</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-note">
+        <strong>Note:</strong> Selected mentors will be required to complete a background check acknowledgment form before being matched with a student. All mentor information is kept confidential within the program.
+      </div>
+
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit">Submit mentor application</button>
+      <p class="submit-note">We respond within 7 business days.</p>
+    </div>
+    <div class="success-msg" id="success-mentor">
+      <i class="ti ti-circle-check" style="font-size:36px;color:#0F6E56;display:block;margin-bottom:.75rem"></i>
+      <h3>Mentor application received!</h3>
+      <p>Thank you for stepping up to mentor. We will be in touch within 7 business days about next steps, including orientation scheduling and mentor matching.</p>
+    </div>
+  </form>
+</div>
+
+<!-- ══ TAB 3: CAPITAL WORKSHOP ══ -->
+<div id="tab-workshop" class="form-panel">
+  <div class="program-card">
+    <div class="program-card-icon" style="background:#E1F5EE;color:#0F6E56"><i class="ti ti-presentation"></i></div>
+    <div>
+      <h3>The Capital Workshop — College Student Application</h3>
+      <p>A two-day intensive that trains college students to facilitate social capital conversations with high school seniors. You'll leave as a certified near-peer educator with a full curriculum packet, practicum experience, and a documented community impact on your resume.</p>
+      <div class="program-detail">
+        <span><i class="ti ti-calendar"></i> 2 days (Fri–Sat)</span>
+        <span><i class="ti ti-users"></i> Cohorts up to 20</span>
+        <span><i class="ti ti-coin"></i> Free</span>
+        <span><i class="ti ti-certificate"></i> Certification included</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="form-workshop" onsubmit="submitForm(event, 'workshop')">
+    <div class="form-grid">
+
+      <div class="section-divider">Personal information</div>
+
+      <div class="form-group">
+        <label for="w-fname">First name <span class="req">*</span></label>
+        <input type="text" id="w-fname" name="first_name" required placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label for="w-lname">Last name <span class="req">*</span></label>
+        <input type="text" id="w-lname" name="last_name" required placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label for="w-email">Email address <span class="req">*</span></label>
+        <input type="email" id="w-email" name="email" required placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="w-phone">Phone number <span class="req">*</span></label>
+        <input type="tel" id="w-phone" name="phone" required placeholder="(312) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="w-college">College / university <span class="req">*</span></label>
+        <input type="text" id="w-college" name="college" required placeholder="Where do you attend?">
+      </div>
+      <div class="form-group">
+        <label for="w-year">Year in school <span class="req">*</span></label>
+        <select id="w-year" name="year" required>
+          <option value="">Select year</option>
+          <option>Freshman</option>
+          <option>Sophomore</option>
+          <option>Junior</option>
+          <option>Senior</option>
+          <option>Graduate student</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="w-major">Major / field of study <span class="req">*</span></label>
+        <input type="text" id="w-major" name="major" required placeholder="e.g. Education, Social Work, Communications...">
+      </div>
+
+      <div class="section-divider">Your interest in the workshop</div>
+
+      <div class="form-group full">
+        <label for="w-why">Why do you want to be a near-peer educator? <span class="req">*</span></label>
+        <textarea id="w-why" name="why_workshop" required placeholder="What draws you to teaching social capital to younger students? What do you bring to this role?"></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="w-community">What community or high school would you like to serve? <span class="req">*</span></label>
+        <input type="text" id="w-community" name="target_community" required placeholder="e.g. my former high school on the South Side, schools near my campus...">
+      </div>
+      <div class="form-group full">
+        <label for="w-speaking">Any prior public speaking, facilitation, or teaching experience?</label>
+        <textarea id="w-speaking" name="facilitation_experience" placeholder="Classes, clubs, jobs, volunteer roles — anything where you've spoken to groups"></textarea>
+      </div>
+
+      <div class="section-divider">Availability</div>
+
+      <div class="form-group full">
+        <label for="w-cohort">Which cohort are you applying for? <span class="req">*</span></label>
+        <select id="w-cohort" name="cohort_preference" required>
+          <option value="">Select preference</option>
+          <option>Fall cohort</option>
+          <option>Spring cohort</option>
+          <option>Either — I'm flexible</option>
+          <option>I'd like to be added to the waitlist</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label>I understand and agree to the following <span class="req">*</span></label>
+        <div class="checkbox-group">
+          <label class="checkbox-item">
+            <input type="checkbox" name="wcommit1" required>
+            I will attend both days of the two-day intensive (Friday and Saturday) in full
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="wcommit2" required>
+            I will complete at least one practicum session — facilitating a workshop at a partner high school
+          </label>
+          <label class="checkbox-item">
+            <input type="checkbox" name="wcommit3" required>
+            I understand that certification is contingent on completing both the training and the practicum
+          </label>
+        </div>
+      </div>
+
+      <div class="form-group full">
+        <label for="w-heard">How did you hear about Empowered Education? <span class="req">*</span></label>
+        <select id="w-heard" name="heard_from" required>
+          <option value="">Select one</option>
+          <option>Professor or advisor</option>
+          <option>Friend or classmate</option>
+          <option>Campus announcement</option>
+          <option>Social media</option>
+          <option>Google search</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit">Submit workshop application</button>
+      <p class="submit-note">We respond within 7 business days.</p>
+    </div>
+    <div class="success-msg" id="success-workshop">
+      <i class="ti ti-circle-check" style="font-size:36px;color:#0F6E56;display:block;margin-bottom:.75rem"></i>
+      <h3>Workshop application received!</h3>
+      <p>Thank you for applying to The Capital Workshop. We will confirm your cohort placement within 7 business days and send you dates, location, and preparation materials.</p>
+    </div>
+  </form>
+</div>
+
+<!-- ══ TAB 4: CAREER PROFESSIONAL / JOB SHADOW ══ -->
+<div id="tab-shadow" class="form-panel">
+  <div class="program-card">
+    <div class="program-card-icon" style="background:#FAEEDA;color:#BA7517"><i class="ti ti-briefcase"></i></div>
+    <div>
+      <h3>Career Professional — Job Shadow Volunteer</h3>
+      <p>Offer a two-hour job shadow experience to a Bridge Mentoring student. Virtual or in-person, in your field, on your schedule. A single conversation with the right professional can permanently shift a student's sense of what's possible for them.</p>
+      <div class="program-detail">
+        <span><i class="ti ti-clock"></i> ~2 hours of your time</span>
+        <span><i class="ti ti-device-laptop"></i> Virtual or in-person</span>
+        <span><i class="ti ti-coin"></i> Volunteer</span>
+        <span><i class="ti ti-calendar"></i> Flexible scheduling</span>
+      </div>
+    </div>
+  </div>
+
+  <form id="form-shadow" onsubmit="submitForm(event, 'shadow')">
+    <div class="form-grid">
+
+      <div class="section-divider">Your information</div>
+
+      <div class="form-group">
+        <label for="p-fname">First name <span class="req">*</span></label>
+        <input type="text" id="p-fname" name="first_name" required placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label for="p-lname">Last name <span class="req">*</span></label>
+        <input type="text" id="p-lname" name="last_name" required placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label for="p-email">Email address <span class="req">*</span></label>
+        <input type="email" id="p-email" name="email" required placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label for="p-phone">Phone number</label>
+        <input type="tel" id="p-phone" name="phone" placeholder="(312) 555-0100">
+      </div>
+      <div class="form-group">
+        <label for="p-title">Job title <span class="req">*</span></label>
+        <input type="text" id="p-title" name="job_title" required placeholder="e.g. Social Worker, Software Engineer, Physician...">
+      </div>
+      <div class="form-group">
+        <label for="p-employer">Employer / organization <span class="req">*</span></label>
+        <input type="text" id="p-employer" name="employer" required placeholder="Where do you work?">
+      </div>
+      <div class="form-group">
+        <label for="p-industry">Industry / field <span class="req">*</span></label>
+        <select id="p-industry" name="industry" required>
+          <option value="">Select field</option>
+          <option>Healthcare & Medicine</option>
+          <option>Social Work & Human Services</option>
+          <option>Education & Academia</option>
+          <option>Law & Criminal Justice</option>
+          <option>Business & Finance</option>
+          <option>Technology & Engineering</option>
+          <option>Government & Public Policy</option>
+          <option>Nonprofit & Community Organizations</option>
+          <option>Arts, Media & Communications</option>
+          <option>Entrepreneurship</option>
+          <option>Other</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="p-years">Years in your field <span class="req">*</span></label>
+        <select id="p-years" name="years_experience" required>
+          <option value="">Select range</option>
+          <option>1–3 years</option>
+          <option>4–7 years</option>
+          <option>8–15 years</option>
+          <option>15+ years</option>
+        </select>
+      </div>
+
+      <div class="section-divider">Your job shadow offering</div>
+
+      <div class="form-group full">
+        <label for="p-offer">What would a student experience during a job shadow with you? <span class="req">*</span></label>
+        <textarea id="p-offer" name="shadow_description" required placeholder="What does a typical day look like? What would you show them? What conversations would you have? Be specific — students are matched based on this description."></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="p-format">Format preference <span class="req">*</span></label>
+        <select id="p-format" name="format" required>
+          <option value="">Select preference</option>
+          <option>In-person at my workplace</option>
+          <option>Virtual (Zoom, Teams, etc.)</option>
+          <option>Either — I'm flexible</option>
+        </select>
+      </div>
+      <div class="form-group full">
+        <label for="p-avail">General availability for scheduling <span class="req">*</span></label>
+        <textarea id="p-avail" name="availability" required placeholder="e.g. Weekday afternoons, Saturday mornings — we'll coordinate the exact date with you after matching"></textarea>
+      </div>
+      <div class="form-group full">
+        <label for="p-capacity">How many students can you accommodate per semester?</label>
+        <select id="p-capacity" name="student_capacity">
+          <option value="">Select</option>
+          <option>1 student</option>
+          <option>2–3 students</option>
+          <option>4–5 students</option>
+          <option>Groups welcome</option>
+        </select>
+      </div>
+
+      <div class="form-group full">
+        <label for="p-heard">How did you hear about Empowered Education? <span class="req">*</span></label>
+        <select id="p-heard" name="heard_from" required>
+          <option value="">Select one</option>
+          <option>Colleague or professional network</option>
+          <option>LinkedIn</option>
+          <option>Friend or family</option>
+          <option>Google search</option>
+          <option>University connection</option>
+          <option>Other</option>
+        </select>
+      </div>
+
+      <div class="form-note">
+        <strong>Thank you.</strong> Career professionals are the backbone of the Bridge program. Once matched, we will connect you directly with the student's mentor to coordinate scheduling. The entire experience typically takes 2–3 hours of your time including brief coordination.
+      </div>
+
+    </div>
+
+    <div class="submit-row">
+      <button type="submit" class="btn-submit">Submit volunteer form</button>
+      <p class="submit-note">We respond within 5 business days.</p>
+    </div>
+    <div class="success-msg" id="success-shadow">
+      <i class="ti ti-circle-check" style="font-size:36px;color:#0F6E56;display:block;margin-bottom:.75rem"></i>
+      <h3>Thank you for volunteering!</h3>
+      <p>Your job shadow offer has been received. We will add you to our professional volunteer network and contact you when a student match is identified — usually within one semester cycle.</p>
+    </div>
+  </form>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <strong style="font-size:15px">Empowered Education</strong>
+      <p>Advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.</p>
+      <p style="margin-top:0.5rem;font-size:12px;color:rgba(255,255,255,0.4)">501(c)(3) Nonprofit · Chicago, IL · empowerededucate.org</p>
+    </div>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="programs.html">Bridge Mentoring</a></li>
+        <li><a href="programs.html">Capital Workshop</a></li>
+        <li><a href="apply.html">Apply now</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organization</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="consulting.html">Consulting</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Empowered Education. All rights reserved.</p>
+    <p>empowerededucate.org</p>
+  </div>
+</footer>
+
+<script src="js/main.js"></script>
+<script>
+
+// Auto-switch tab from URL param e.g. apply.html?tab=mentor
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(window.location.search);
+  const tab = params.get('tab');
+  if (tab && ['student','mentor','workshop','shadow'].includes(tab)) {
+    document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => {
+      t.classList.remove('active');
+      t.setAttribute('aria-selected','false');
+    });
+    const panel = document.getElementById('tab-' + tab);
+    const tabBtn = document.querySelector(`.tab[onclick="showTab('${tab}')"]`);
+    if (panel) panel.classList.add('active');
+    if (tabBtn) { tabBtn.classList.add('active'); tabBtn.setAttribute('aria-selected','true'); }
+  }
+});
+
+function showTab(name) {
+  // Hide all panels and deactivate tabs
+  document.querySelectorAll('.form-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab').forEach(t => {
+    t.classList.remove('active');
+    t.setAttribute('aria-selected', 'false');
+  });
+  // Show selected
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+  event.target.setAttribute('aria-selected', 'true');
+  // Scroll to top of form
+  document.querySelector('.tab-row').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function submitForm(e, type) {
+  e.preventDefault();
+  const form = e.target;
+  const btn  = form.querySelector('.btn-submit');
+  const success = document.getElementById('success-' + type);
+
+  // Collect all form data
+  const data = Object.fromEntries(new FormData(form).entries());
+  data.form_type = type;
+  data.submitted_at = new Date().toISOString();
+
+  // Show loading state
+  btn.disabled = true;
+  btn.textContent = 'Submitting...';
+
+  // ── AIRTABLE SUBMISSION ──────────────────────────────────────────────
+  // TODO: Replace AIRTABLE_TOKEN and BASE_ID below once your Airtable is set up
+  // Instructions: https://airtable.com/developers/web/api/introduction
+  const AIRTABLE_TOKEN = 'YOUR_AIRTABLE_TOKEN_HERE';
+  const BASE_ID        = 'YOUR_BASE_ID_HERE';
+
+  // Map form type to Airtable table name
+  const tableMap = {
+    student:  'Student Applications',
+    mentor:   'Mentor Applications',
+    workshop: 'Workshop Applications',
+    shadow:   'Job Shadow Volunteers',
+  };
+
+  const TABLE = tableMap[type];
+
+  // Format data as Airtable fields
+  const fields = {};
+  for (const [key, val] of Object.entries(data)) {
+    // Convert snake_case to Title Case for Airtable column names
+    const fieldName = key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+    fields[fieldName] = val;
+  }
+
+  if (AIRTABLE_TOKEN !== 'YOUR_AIRTABLE_TOKEN_HERE') {
+    // Live Airtable submission
+    fetch(`https://api.airtable.com/v0/${BASE_ID}/${encodeURIComponent(TABLE)}`, {
+      method: 'POST',
+      headers: {
+        'Authorization': `Bearer ${AIRTABLE_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ fields }),
+    })
+    .then(res => res.json())
+    .then(result => {
+      if (result.id) {
+        showSuccess(form, btn, success, type, data.email);
+      } else {
+        btn.disabled = false;
+        btn.textContent = 'Submit application';
+        alert('Something went wrong. Please email programs@empowerededucate.org directly.');
+        console.error('Airtable error:', result);
+      }
+    })
+    .catch(err => {
+      btn.disabled = false;
+      btn.textContent = 'Submit application';
+      alert('Connection error. Please email programs@empowerededucate.org directly.');
+      console.error(err);
+    });
+  } else {
+    // Demo mode — show success without real submission
+    setTimeout(() => showSuccess(form, btn, success, type, data.email), 800);
+  }
+}
+
+function showSuccess(form, btn, successEl, type, email) {
+  form.style.display = 'none';
+  successEl.style.display = 'block';
+  const emailConfirm = document.getElementById('student-email-confirm');
+  if (emailConfirm && email) emailConfirm.textContent = email;
+  successEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+</script>
+</body>
+</html>
