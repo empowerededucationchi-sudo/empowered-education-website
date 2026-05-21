@@ -2,7 +2,7 @@
 
 Official website for **Empowered Education**, a 501(c)(3) nonprofit advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.
 
-**empowerededucation.org** · Chicago, IL
+**empowerededucate.org** · Chicago, IL
 
 ## Pages
 
