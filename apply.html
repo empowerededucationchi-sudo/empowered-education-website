@@ -61,6 +61,8 @@
       .tab { padding: .75rem 1rem; font-size: 12px; }
     }
   </style>
+  <!-- Site configuration — loaded from config.js (not committed to GitHub) -->
+  <script src="config.js"></script>
 </head>
 <body>
 
@@ -758,8 +760,8 @@ function submitForm(e, type) {
   // ── AIRTABLE SUBMISSION ──────────────────────────────────────────────
   // TODO: Replace AIRTABLE_TOKEN and BASE_ID below once your Airtable is set up
   // Instructions: https://airtable.com/developers/web/api/introduction
-  const AIRTABLE_TOKEN = 'YOUR_AIRTABLE_TOKEN_HERE';
-  const BASE_ID        = 'YOUR_BASE_ID_HERE';
+  const AIRTABLE_TOKEN = window.EE_CONFIG?.airtableToken || '';
+  const BASE_ID        = window.EE_CONFIG?.baseId || '';
 
   // Map form type to Airtable table name
   const tableMap = {
