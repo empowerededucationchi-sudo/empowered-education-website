@@ -1,17 +1,26 @@
-// Nav toggle for mobile
-const toggle = document.querySelector('.nav-toggle');
-const navLinks = document.querySelector('.nav-links');
-if (toggle && navLinks) {
-  toggle.addEventListener('click', () => navLinks.classList.toggle('open'));
-}
+// Empowered Education — Global JS
 
-// Set active nav link
-const currentPage = window.location.pathname.split('/').pop();
-document.querySelectorAll('.nav-links a').forEach(link => {
-  if (link.getAttribute('href').includes(currentPage) && currentPage !== '') {
-    link.classList.add('active');
+document.addEventListener('DOMContentLoaded', () => {
+  const hamburger = document.querySelector('.hamburger');
+  const navLinks  = document.querySelector('.nav-links');
+
+  if (hamburger && navLinks) {
+    hamburger.addEventListener('click', () => {
+      navLinks.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded',
+        navLinks.classList.contains('open'));
+    });
   }
-  if (currentPage === '' || currentPage === 'index.html') {
-    // homepage — no active link needed
-  }
+
+  const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    if (link.getAttribute('href') === currentPage) link.classList.add('active');
+  });
+
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', e => {
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+    });
+  });
 });

@@ -3,184 +3,176 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Empowered Education | AI Literacy · Career Pathways · Equity-Centered Education</title>
-  <meta name="description" content="Empowered Education is a 501(c)(3) nonprofit advancing equity in learning through youth pipeline programs, AI literacy consulting, and curriculum development.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <title>Empowered Education | AI Literacy · Career Pathways · Equity</title>
+  <meta name="description" content="Empowered Education is a 501(c)(3) nonprofit advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.">
+  <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-  <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
 
-<nav class="nav">
-  <a href="index.html" class="nav-logo">Empowered Education</a>
-  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
-  <div class="nav-links">
-    <a href="pages/about.html">About</a>
-    <a href="pages/programs.html">Programs</a>
-    <a href="pages/consulting.html">Consulting</a>
-    <a href="pages/the-problem.html">The Problem</a>
-    <a href="pages/shop.html">Shop</a>
-    <a href="pages/impact.html">Impact</a>
-    <a href="pages/contact.html">Contact</a>
-  </div>
+<nav>
+  <a href="index.html" class="nav-logo">Empowered <span>Education</span></a>
+  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li><a href="programs.html">Programs</a></li>
+    <li><a href="consulting.html">Consulting</a></li>
+    <li><a href="the-problem.html">The Problem</a></li>
+    <li><a href="shop.html">Shop</a></li>
+    <li><a href="impact.html">Impact</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
+  </ul>
 </nav>
 
-<main>
+<div class="hero">
+  <p class="eyebrow">501(c)(3) Nonprofit · Chicago, IL</p>
+  <h1>Education that opens doors. Knowledge that builds futures.</h1>
+  <p>Empowered Education advances equity in learning by preparing young people for college and career success — and helping institutions navigate the age of AI with clarity, ethics, and confidence.</p>
+  <div class="btn-row">
+    <a href="programs.html" class="btn-primary">Explore our programs</a>
+    <a href="consulting.html" class="btn-secondary">Work with us</a>
+    <a href="contact.html" class="btn-secondary">Support our mission</a>
+  </div>
+</div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="container">
-    <p class="eyebrow">501(c)(3) nonprofit · Chicago, IL</p>
-    <h1>Education that opens doors.<br>Knowledge that builds futures.</h1>
-    <p class="hero-sub">Empowered Education advances equity in learning by preparing young people for college and career success — and helping institutions navigate the age of AI with clarity, ethics, and confidence.</p>
-    <div class="cta-row">
-      <a href="pages/programs.html" class="btn-primary">Explore our programs</a>
-      <a href="pages/consulting.html" class="btn-secondary">Work with us</a>
-      <a href="pages/contact.html" class="btn-secondary">Support our mission</a>
+<section>
+  <p class="section-tag">What we do</p>
+  <h2>Three ways we create impact</h2>
+  <p>From high school hallways to university faculty rooms, Empowered Education meets learners and leaders where they are — and moves them forward.</p>
+  <div class="grid-3">
+    <div class="card">
+      <div class="card-icon" style="background:var(--purple-light);color:var(--purple)"><i class="ti ti-users"></i></div>
+      <div class="accent-bar" style="background:var(--purple)"></div>
+      <h3>Youth pipeline programs</h3>
+      <p>We connect high school seniors with college students and career professionals to build social capital, college readiness, and professional identity — before the first semester begins.</p>
+      <a href="programs.html" style="font-size:13px;color:var(--purple);text-decoration:none;display:block;margin-top:0.75rem">See programs →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:var(--teal-light);color:var(--teal)"><i class="ti ti-brain"></i></div>
+      <div class="accent-bar" style="background:var(--teal)"></div>
+      <h3>AI literacy consulting</h3>
+      <p>We help colleges, universities, and school districts navigate artificial intelligence through faculty training, policy design, disclosure frameworks, and curriculum integration — grounded in equity.</p>
+      <a href="consulting.html" style="font-size:13px;color:var(--teal);text-decoration:none;display:block;margin-top:0.75rem">Work with us →</a>
+    </div>
+    <div class="card">
+      <div class="card-icon" style="background:var(--coral-light);color:var(--coral)"><i class="ti ti-file-certificate"></i></div>
+      <div class="accent-bar" style="background:var(--coral)"></div>
+      <h3>Curriculum products</h3>
+      <p>Practical, equity-centered toolkits, course modules, and policy templates — built for instructors and administrators who need resources they can deploy immediately.</p>
+      <a href="shop.html" style="font-size:13px;color:var(--coral);text-decoration:none;display:block;margin-top:0.75rem">Browse resources →</a>
     </div>
   </div>
 </section>
 
-<!-- THREE PILLARS -->
-<section class="section">
-  <div class="container">
-    <p class="section-tag">What we do</p>
-    <h2>Three ways we create impact</h2>
-    <p class="section-body">From high school hallways to university faculty rooms, Empowered Education meets learners and leaders where they are — and moves them forward.</p>
-    <div class="pillar-grid">
-      <div class="pillar">
-        <div class="pillar-icon purple"><i class="ti ti-users"></i></div>
-        <div class="accent-bar purple"></div>
-        <h3>Youth pipeline programs</h3>
-        <p>We connect high school seniors with college students and career professionals to build social capital, college readiness, and professional identity — before the first semester begins.</p>
-        <a href="pages/programs.html" class="pillar-link">See programs →</a>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon teal"><i class="ti ti-brain"></i></div>
-        <div class="accent-bar teal"></div>
-        <h3>AI literacy consulting</h3>
-        <p>We help colleges, universities, and school districts navigate artificial intelligence through faculty training, policy design, disclosure frameworks, and curriculum integration — grounded in equity.</p>
-        <a href="pages/consulting.html" class="pillar-link">Work with us →</a>
-      </div>
-      <div class="pillar">
-        <div class="pillar-icon coral"><i class="ti ti-file-certificate"></i></div>
-        <div class="accent-bar coral"></div>
-        <h3>Curriculum products</h3>
-        <p>Practical, equity-centered toolkits, course modules, and policy templates — built for instructors and administrators who need resources they can deploy immediately.</p>
-        <a href="pages/shop.html" class="pillar-link">Browse resources →</a>
-      </div>
-    </div>
+<section>
+  <p class="section-tag">Our approach</p>
+  <h2>Social capital is the curriculum no one teaches</h2>
+  <p>The students who struggle most in higher education rarely lack intelligence — they lack access. Access to professionals who look like them. Access to networks that open doors. Access to a faculty member who explains not just the assignment, but the unspoken rules of academic culture.</p>
+  <p>Empowered Education was founded on one conviction: that knowledge about how institutions work — social capital — is as teachable as calculus, and far too rarely taught. Our programs make that knowledge explicit, transferable, and free to every student we serve.</p>
+  <div class="pullquote">
+    <p>"The gap isn't academic preparation. It's the invisible curriculum — who you know, how you present, and whether anyone told you the rules before you walked in the room."</p>
+    <cite>— Theodore L. Barnes, M.S.Ed., Founder</cite>
   </div>
 </section>
 
-<!-- APPROACH -->
-<section class="section alt">
-  <div class="container">
-    <p class="section-tag">Our approach</p>
-    <h2>Social capital is the curriculum no one teaches</h2>
-    <p class="section-body">The students who struggle most in higher education rarely lack intelligence — they lack access. Access to professionals who look like them. Access to networks that open internship doors. Access to a faculty member who explains not just the assignment, but the unspoken rules of academic culture.</p>
-    <p class="section-body">Empowered Education was founded on one conviction: that knowledge about how institutions work — social capital — is as teachable as calculus, and far too rarely taught. Our programs make that knowledge explicit, transferable, and free to every student we serve.</p>
-    <blockquote>
-      <p>"The gap isn't academic preparation. It's the invisible curriculum — who you know, how you present, and whether anyone told you the rules before you walked in the room."</p>
-      <cite>— Theodore L. Barnes, M.S.Ed., Founder</cite>
-    </blockquote>
+<section>
+  <p class="section-tag">Our reach</p>
+  <h2>Building toward scale</h2>
+  <p>We are growing with intention — deepening our local impact in the Chicago region while building the infrastructure to serve institutions and students nationally and internationally.</p>
+  <div class="stat-row">
+    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years as a 501(c)(3)</div></div>
+    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Program areas</div></div>
+    <div class="stat"><div class="stat-num">2</div><div class="stat-label">University connections</div></div>
+    <div class="stat"><div class="stat-num">IL</div><div class="stat-label">Currently serving Chicago region</div></div>
   </div>
 </section>
 
-<!-- STATS -->
-<section class="section">
-  <div class="container">
-    <p class="section-tag">Our reach</p>
-    <h2>Building toward scale</h2>
-    <p class="section-body">We are growing with intention — deepening our local impact in the Chicago region while building the infrastructure to serve institutions and students nationally and internationally.</p>
-    <div class="stat-row">
-      <div class="stat"><span class="stat-num">5+</span><span class="stat-label">Years operating as a 501(c)(3)</span></div>
-      <div class="stat"><span class="stat-num">3</span><span class="stat-label">Program areas</span></div>
-      <div class="stat"><span class="stat-num">10</span><span class="stat-label">Course modules in AI Career Explorations</span></div>
-      <div class="stat"><span class="stat-num">IL</span><span class="stat-label">Currently serving Chicago region, expanding nationally</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- FOUNDER -->
-<section class="section alt">
-  <div class="container">
-    <p class="section-tag">Founder</p>
-    <h2>Led by someone who has done the work</h2>
-    <div class="founder-strip">
-      <div class="avatar">TB</div>
-      <div class="founder-info">
-        <p class="founder-name">Theodore L. Barnes, M.S.Ed.</p>
-        <p class="founder-titles">Founder &amp; Executive Director, Empowered Education · Assistant Professor of Career Development · Doctoral Candidate, Loyola University Chicago · Executive Leadership Certificate, University of Chicago Booth School of Business</p>
-        <div class="pill-row">
-          <span class="pill">AI literacy</span>
-          <span class="pill">Enrollment management</span>
-          <span class="pill">Career development</span>
-          <span class="pill">Higher ed equity</span>
-          <span class="pill">Published scholar</span>
-          <span class="pill">Research scientist</span>
-        </div>
+<section>
+  <p class="section-tag">Founder</p>
+  <h2>Led by someone who has done the work</h2>
+  <div style="display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap;margin-top:1rem">
+    <div style="width:64px;height:64px;min-width:64px;border-radius:50%;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--purple)">TB</div>
+    <div style="flex:1;min-width:200px">
+      <p style="font-size:15px;font-weight:600;color:var(--gray-dark);margin-bottom:2px">Theodore L. Barnes, M.S.Ed.</p>
+      <p style="font-size:13px;color:var(--gray-mid);margin-bottom:0.75rem">Founder &amp; Executive Director · Assistant Professor of Career Development · Published Scholar &amp; Research Scientist · Doctoral Candidate, Loyola University Chicago</p>
+      <div>
+        <span class="pill">AI literacy</span><span class="pill">Higher ed equity</span><span class="pill">Enrollment management</span>
+        <span class="pill">Career development</span><span class="pill">Social work education</span><span class="pill">Antiracist pedagogy</span>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AUDIENCE -->
-<section class="section">
-  <div class="container">
-    <p class="section-tag">Who we serve</p>
-    <h2>Find your path with us</h2>
-    <div class="audience-grid">
-      <a href="pages/programs.html" class="aud-card">
-        <p class="aud-label">Students &amp; families</p>
-        <h3>High school and college students</h3>
-        <p>Learn how to apply to our mentoring and workshop programs, and what to expect when you join.</p>
-      </a>
-      <a href="pages/consulting.html" class="aud-card">
-        <p class="aud-label">Institutions</p>
-        <h3>Colleges, universities &amp; districts</h3>
-        <p>Explore our consulting engagements — AI literacy training, policy design, and faculty development.</p>
-      </a>
-      <a href="pages/contact.html" class="aud-card">
-        <p class="aud-label">Funders &amp; partners</p>
-        <h3>Foundations &amp; grant makers</h3>
-        <p>Review our theory of change and current funding priorities — and explore partnership opportunities.</p>
-      </a>
-    </div>
+<section>
+  <p class="section-tag">Who we serve</p>
+  <h2>Find your path with us</h2>
+  <div class="grid-3">
+    <a href="programs.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Students &amp; families</p>
+      <h3 style="margin-top:0">High school and college students</h3>
+      <p>Learn how to apply to our mentoring and workshop programs, and what to expect when you join.</p>
+    </a>
+    <a href="consulting.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Institutions</p>
+      <h3 style="margin-top:0">Colleges, universities &amp; districts</h3>
+      <p>Explore our consulting engagements — AI literacy training, policy design, and faculty development.</p>
+    </a>
+    <a href="contact.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
+      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Funders &amp; partners</p>
+      <h3 style="margin-top:0">Foundations &amp; grant makers</h3>
+      <p>Review our theory of change and funding priorities — and explore partnership opportunities.</p>
+    </a>
   </div>
 </section>
 
-<!-- FOOTER CTA -->
-<section class="section cta-section">
-  <div class="container text-center">
-    <p class="section-tag">Get started</p>
-    <h2>Ready to learn, partner, or support?</h2>
-    <p class="section-body center">Whether you're a student, an institution, or a funder — we want to hear from you.</p>
-    <div class="cta-row">
-      <a href="pages/contact.html" class="btn-primary">Contact us</a>
-      <a href="pages/contact.html#newsletter" class="btn-secondary">Join our mailing list</a>
-    </div>
+<section style="text-align:center;border-bottom:none">
+  <p class="section-tag" style="text-align:center">Get started</p>
+  <h2 style="margin:0 auto 0.75rem;max-width:440px">Ready to learn, partner, or support?</h2>
+  <p style="margin:0 auto 1.75rem;max-width:440px">Whether you're a student, an institution, or a funder — we want to hear from you.</p>
+  <div class="btn-row" style="justify-content:center">
+    <a href="contact.html" class="btn-primary">Contact us</a>
+    <a href="about.html" class="btn-secondary">Learn about us</a>
   </div>
 </section>
 
-</main>
-
-<footer class="footer">
-  <div class="container footer-inner">
+<footer>
+  <div class="footer-inner">
     <div class="footer-brand">
-      <p class="footer-logo">Empowered Education</p>
-      <p class="footer-tagline">501(c)(3) nonprofit · Chicago, IL<br>© 2026 Empowered Education. All rights reserved.</p>
+      <strong style="font-size:15px">Empowered Education</strong>
+      <p>Advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.</p>
+      <p style="margin-top:0.5rem;font-size:12px;color:rgba(255,255,255,0.4)">501(c)(3) Nonprofit · Chicago, IL</p>
     </div>
-    <div class="footer-links">
-      <a href="pages/about.html">About</a>
-      <a href="pages/programs.html">Programs</a>
-      <a href="pages/consulting.html">Consulting</a>
-      <a href="pages/the-problem.html">The Problem</a>
-      <a href="pages/shop.html">Shop</a>
-      <a href="pages/impact.html">Impact</a>
-      <a href="pages/contact.html">Contact</a>
+    <div class="footer-col">
+      <h4>Programs</h4>
+      <ul>
+        <li><a href="programs.html">Bridge Mentoring</a></li>
+        <li><a href="programs.html">Capital Workshop</a></li>
+        <li><a href="programs.html">Job Shadowing</a></li>
+      </ul>
     </div>
+    <div class="footer-col">
+      <h4>Consulting</h4>
+      <ul>
+        <li><a href="consulting.html">AI Literacy Training</a></li>
+        <li><a href="consulting.html">Policy Design</a></li>
+        <li><a href="consulting.html">Faculty Modeling</a></li>
+        <li><a href="consulting.html">Curriculum Integration</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Organization</h4>
+      <ul>
+        <li><a href="about.html">About</a></li>
+        <li><a href="the-problem.html">The Problem</a></li>
+        <li><a href="impact.html">Impact</a></li>
+        <li><a href="shop.html">Shop</a></li>
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2026 Empowered Education. All rights reserved.</p>
+    <p>empowerededucation.org</p>
   </div>
 </footer>
 
