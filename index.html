@@ -5,142 +5,1131 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Empowered Education | AI Literacy · Career Pathways · Equity</title>
   <meta name="description" content="Empowered Education is a 501(c)(3) nonprofit advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ink:      #1A1916;
+      --cream:    #F5F2EA;
+      --purple:   #534AB7;
+      --purple-l: #EEEDFE;
+      --teal:     #0F6E56;
+      --teal-l:   #E1F5EE;
+      --coral:    #C24B27;
+      --gold:     #B8920A;
+      --mid:      #6B6960;
+      --border:   rgba(26,25,22,0.12);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--ink);
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ── Custom cursor ── */
+    .cursor {
+      width: 10px; height: 10px;
+      background: var(--purple);
+      border-radius: 50%;
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      transition: transform 0.15s ease, background 0.2s ease;
+      transform: translate(-50%, -50%);
+    }
+    .cursor.hovering { transform: translate(-50%, -50%) scale(3); background: var(--coral); opacity: 0.4; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1.25rem 2.5rem;
+      mix-blend-mode: multiply;
+    }
+
+    .nav-logo {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--ink);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 2rem;
+    }
+
+    .nav-right a {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--mid);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-right a:hover { color: var(--ink); }
+
+    .nav-cta {
+      background: var(--ink) !important;
+      color: var(--cream) !important;
+      padding: 8px 18px;
+      border-radius: 100px;
+      font-size: 13px !important;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--purple) !important; }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 2.5rem 4rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Grain overlay */
+    .hero-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      opacity: 0.5;
+      z-index: 1;
+    }
+
+    /* Geometric accent shapes */
+    .shape-1 {
+      position: absolute;
+      top: 12%;
+      right: 8%;
+      width: 320px;
+      height: 320px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(83,74,183,0.12) 0%, transparent 70%);
+      animation: float1 8s ease-in-out infinite;
+    }
+
+    .shape-2 {
+      position: absolute;
+      bottom: 20%;
+      left: 5%;
+      width: 200px;
+      height: 200px;
+      border: 1px solid rgba(15,110,86,0.15);
+      border-radius: 50%;
+      animation: float2 10s ease-in-out infinite;
+    }
+
+    .shape-3 {
+      position: absolute;
+      top: 30%;
+      right: 20%;
+      width: 60px;
+      height: 60px;
+      background: var(--coral);
+      opacity: 0.08;
+      transform: rotate(45deg);
+      animation: spin 20s linear infinite;
+    }
+
+    .shape-4 {
+      position: absolute;
+      bottom: 10%;
+      right: 15%;
+      width: 1px;
+      height: 140px;
+      background: linear-gradient(to bottom, transparent, var(--purple), transparent);
+      opacity: 0.3;
+    }
+
+    @keyframes float1 { 0%,100%{transform:translateY(0) scale(1)} 50%{transform:translateY(-20px) scale(1.05)} }
+    @keyframes float2 { 0%,100%{transform:translateY(0) rotate(0deg)} 50%{transform:translateY(15px) rotate(10deg)} }
+    @keyframes spin   { from{transform:rotate(45deg)} to{transform:rotate(405deg)} }
+
+    /* Hero content */
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease 0.2s forwards;
+    }
+
+    .hero-label span {
+      display: inline-block;
+      width: 24px;
+      height: 1px;
+      background: var(--mid);
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(48px, 7vw, 88px);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      color: var(--ink);
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.35s forwards;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: var(--purple);
+    }
+
+    h1 .line-teal { color: var(--teal); }
+    h1 .line-coral { color: var(--coral); }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      color: var(--mid);
+      max-width: 520px;
+      line-height: 1.75;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.5s forwards;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.65s forwards;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--ink);
+      color: var(--cream);
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: background 0.2s, transform 0.2s;
+    }
+    .btn-main:hover { background: var(--purple); transform: translateY(-2px); }
+    .btn-main i { font-size: 16px; }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      color: var(--mid);
+      font-size: 14px;
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 2px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .btn-ghost:hover { color: var(--ink); border-color: var(--ink); }
+
+    /* Hero scroll indicator */
+    .scroll-hint {
+      position: absolute;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 11px;
+      color: var(--mid);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      opacity: 0;
+      animation: fadeUp 1s ease 1s forwards;
+    }
+
+    .scroll-line {
+      width: 40px;
+      height: 1px;
+      background: var(--mid);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .scroll-line::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -100%;
+      width: 100%;
+      height: 100%;
+      background: var(--purple);
+      animation: scanline 2s ease-in-out infinite;
+    }
+
+    @keyframes scanline { 0%{left:-100%} 100%{left:100%} }
+
+    /* Stats strip */
+    .stats-strip {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      gap: 0;
+      opacity: 0;
+      animation: fadeUp 0.9s ease 0.8s forwards;
+    }
+
+    .stat-item {
+      padding: 1.5rem 2rem;
+      border-left: 1px solid var(--border);
+      border-top: 1px solid var(--border);
+      text-align: center;
+      min-width: 120px;
+    }
+
+    .stat-item:last-child { border-right: 1px solid var(--border); }
+
+    .stat-n {
+      font-family: 'Fraunces', serif;
+      font-size: 28px;
+      font-weight: 300;
+      color: var(--ink);
+      display: block;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+
+    .stat-l {
+      font-size: 10px;
+      color: var(--mid);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* ── MARQUEE ── */
+    .marquee-wrap {
+      overflow: hidden;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      background: var(--ink);
+    }
+
+    .marquee-track {
+      display: flex;
+      width: max-content;
+      animation: marquee 25s linear infinite;
+    }
+
+    .marquee-track:hover { animation-play-state: paused; }
+
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+      padding: 0 2rem;
+      font-family: 'Fraunces', serif;
+      font-size: 15px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      white-space: nowrap;
+      opacity: 0.75;
+    }
+
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--coral);
+      flex-shrink: 0;
+    }
+
+    @keyframes marquee { from{transform:translateX(0)} to{transform:translateX(-50%)} }
+
+    /* ── THREE PILLARS ── */
+    .pillars {
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .pillars-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .pillars-header h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(32px, 4vw, 48px);
+      font-weight: 300;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      max-width: 400px;
+    }
+
+    .pillars-header p {
+      font-size: 14px;
+      color: var(--mid);
+      max-width: 300px;
+      line-height: 1.7;
+    }
+
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+
+    .pillar-card {
+      padding: 2.5rem;
+      border-right: 1px solid var(--border);
+      text-decoration: none;
+      color: inherit;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      display: block;
+    }
+
+    .pillar-card:last-child { border-right: none; }
+
+    .pillar-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+
+    .pillar-card.purple::before { background: var(--purple-l); }
+    .pillar-card.teal::before   { background: var(--teal-l); }
+    .pillar-card.coral::before  { background: rgba(194,75,39,0.06); }
+
+    .pillar-card:hover::before { opacity: 1; }
+
+    .pillar-num {
+      font-family: 'Fraunces', serif;
+      font-size: 11px;
+      font-weight: 300;
+      color: var(--mid);
+      margin-bottom: 2rem;
+      display: block;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pillar-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      margin-bottom: 1.25rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pillar-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 22px;
+      font-weight: 400;
+      line-height: 1.25;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.75rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pillar-card p {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .pillar-link {
+      font-size: 12px;
+      color: var(--mid);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      position: relative;
+      z-index: 1;
+      transition: gap 0.2s, color 0.2s;
+    }
+
+    .pillar-card:hover .pillar-link { gap: 10px; color: var(--ink); }
+
+    /* ── FOUNDER STRIP ── */
+    .founder-strip {
+      background: var(--ink);
+      padding: 5rem 2.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .founder-left h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.5vw, 44px);
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.5rem;
+    }
+
+    .founder-left p {
+      font-size: 14px;
+      color: rgba(245,242,234,0.6);
+      line-height: 1.8;
+      margin-bottom: 2rem;
+    }
+
+    .founder-creds {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .cred-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 12px;
+      color: rgba(245,242,234,0.5);
+    }
+
+    .cred-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .founder-right {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .founder-quote {
+      border-left: 2px solid var(--purple);
+      padding: 1.5rem 1.75rem;
+      background: rgba(83,74,183,0.1);
+      border-radius: 0 12px 12px 0;
+    }
+
+    .founder-quote p {
+      font-family: 'Fraunces', serif;
+      font-size: 18px;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--cream);
+      line-height: 1.65;
+      margin-bottom: 0.75rem;
+    }
+
+    .founder-quote cite {
+      font-size: 11px;
+      color: rgba(245,242,234,0.45);
+      font-style: normal;
+      letter-spacing: 0.05em;
+    }
+
+    .founder-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      border: 1px solid rgba(245,242,234,0.2);
+      color: var(--cream);
+      padding: 12px 22px;
+      border-radius: 100px;
+      font-size: 13px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+      width: fit-content;
+    }
+    .founder-btn:hover { border-color: var(--purple); background: rgba(83,74,183,0.2); }
+
+    /* ── AUDIENCE ── */
+    .audience {
+      padding: 6rem 2.5rem;
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .audience h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 3.5vw, 42px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+    }
+
+    .aud-card {
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      text-decoration: none;
+      color: inherit;
+      transition: transform 0.25s, box-shadow 0.25s, border-color 0.25s;
+      display: block;
+    }
+
+    .aud-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 60px rgba(26,25,22,0.1);
+      border-color: transparent;
+    }
+
+    .aud-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--mid);
+      margin-bottom: 0.75rem;
+      display: block;
+    }
+
+    .aud-card h3 {
+      font-family: 'Fraunces', serif;
+      font-size: 20px;
+      font-weight: 400;
+      line-height: 1.3;
+      margin-bottom: 0.5rem;
+    }
+
+    .aud-card p {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.65;
+      margin-bottom: 1.25rem;
+    }
+
+    .aud-arrow {
+      font-size: 18px;
+      color: var(--mid);
+      transition: transform 0.2s, color 0.2s;
+    }
+
+    .aud-card:hover .aud-arrow { transform: translateX(6px); color: var(--purple); }
+
+    /* ── RESEARCH CALLOUT ── */
+    .research-band {
+      margin: 0 2.5rem 6rem;
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+      background: white;
+    }
+
+    .research-band h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(24px, 3vw, 36px);
+      font-weight: 300;
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+
+    .research-band p {
+      font-size: 14px;
+      color: var(--mid);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .pub-card {
+      background: var(--cream);
+      border-radius: 12px;
+      padding: 1.5rem;
+      border-left: 3px solid var(--purple);
+    }
+
+    .pub-label {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--purple);
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .pub-title {
+      font-family: 'Fraunces', serif;
+      font-size: 16px;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--ink);
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+
+    .pub-meta {
+      font-size: 11px;
+      color: var(--mid);
+      line-height: 1.5;
+    }
+
+    /* ── CTA FOOTER ── */
+    .cta-footer {
+      background: var(--purple);
+      padding: 5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-footer::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.08) 0%, transparent 60%),
+                  radial-gradient(ellipse at 70% 50%, rgba(0,0,0,0.15) 0%, transparent 60%);
+    }
+
+    .cta-footer h2 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(28px, 4vw, 52px);
+      font-weight: 300;
+      color: white;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-footer p {
+      font-size: 16px;
+      color: rgba(255,255,255,0.65);
+      max-width: 460px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btns {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cta-btns a:first-child {
+      background: white;
+      color: var(--purple);
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 14px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .cta-btns a:first-child:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+
+    .cta-btns a:last-child {
+      border: 1px solid rgba(255,255,255,0.35);
+      color: white;
+      padding: 14px 28px;
+      border-radius: 100px;
+      font-size: 14px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s;
+    }
+    .cta-btns a:last-child:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--ink);
+      padding: 3rem 2.5rem 2rem;
+    }
+
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 2rem;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      margin-bottom: 1.5rem;
+    }
+
+    .footer-brand strong {
+      font-family: 'Fraunces', serif;
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--cream);
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .footer-brand p {
+      font-size: 12px;
+      color: rgba(245,242,234,0.4);
+      line-height: 1.7;
+    }
+
+    .footer-col h4 {
+      font-size: 10px;
+      font-weight: 500;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: rgba(245,242,234,0.35);
+      margin-bottom: 1rem;
+    }
+
+    .footer-col ul { list-style: none; }
+    .footer-col li { margin-bottom: 0.5rem; }
+    .footer-col a {
+      font-size: 13px;
+      color: rgba(245,242,234,0.55);
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-col a:hover { color: var(--cream); }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .footer-bottom p {
+      font-size: 11px;
+      color: rgba(245,242,234,0.3);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      nav { padding: 1rem 1.5rem; }
+      .nav-right { gap: 1rem; }
+      .nav-right a:not(.nav-cta) { display: none; }
+      .hero { padding: 7rem 1.5rem 3rem; }
+      h1 { font-size: 40px; }
+      .hero-sub { font-size: 15px; }
+      .stats-strip { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); margin-top: 3rem; }
+      .stat-item { border-top: 1px solid var(--border); border-left: none; border-right: none; border-right: 1px solid var(--border); }
+      .pillars { padding: 3rem 1.5rem; }
+      .pillars-grid { grid-template-columns: 1fr; }
+      .pillar-card { border-right: none; border-bottom: 1px solid var(--border); }
+      .pillar-card:last-child { border-bottom: none; }
+      .founder-strip { grid-template-columns: 1fr; gap: 2rem; padding: 3rem 1.5rem; }
+      .audience { padding: 3rem 1.5rem; }
+      .audience-grid { grid-template-columns: 1fr; }
+      .research-band { grid-template-columns: 1fr; margin: 0 1.5rem 3rem; padding: 2rem; gap: 2rem; }
+      .cta-footer { padding: 3rem 1.5rem; }
+      .footer-inner { grid-template-columns: 1fr 1fr; }
+      body { cursor: auto; }
+      .cursor { display: none; }
+    }
+  </style>
 </head>
 <body>
 
+<div class="cursor" id="cursor"></div>
+
 <nav>
-  <a href="index.html" class="nav-logo">Empowered <span>Education</span></a>
-  <button class="hamburger" aria-label="Toggle menu" aria-expanded="false">&#9776;</button>
-  <ul class="nav-links">
-    <li><a href="about.html">About</a></li>
-    <li><a href="programs.html">Programs</a></li>
-    <li><a href="consulting.html">Consulting</a></li>
-    <li><a href="the-problem.html">The Problem</a></li>
-    <li><a href="shop.html">Shop</a></li>
-    <li><a href="impact.html">Impact</a></li>
-    <li><a href="contact.html" class="nav-cta">Contact</a></li>
-  </ul>
+  <a href="index.html" class="nav-logo">Empowered Education</a>
+  <div class="nav-right">
+    <a href="programs.html">Programs</a>
+    <a href="consulting.html">Consulting</a>
+    <a href="the-problem.html">The Problem</a>
+    <a href="shop.html">Shop</a>
+    <a href="contact.html" class="nav-cta">Get in touch</a>
+  </div>
 </nav>
 
-<div class="hero">
-  <p class="eyebrow">501(c)(3) Nonprofit · Chicago, IL</p>
-  <h1>Education that opens doors. Knowledge that builds futures.</h1>
-  <p>Empowered Education advances equity in learning by preparing young people for college and career success — and helping institutions navigate the age of AI with clarity, ethics, and confidence.</p>
-  <div class="btn-row">
-    <a href="programs.html" class="btn-primary">Explore our programs</a>
-    <a href="consulting.html" class="btn-secondary">Work with us</a>
-    <a href="contact.html" class="btn-secondary">Support our mission</a>
+<!-- ── HERO ── -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="shape-1"></div>
+    <div class="shape-2"></div>
+    <div class="shape-3"></div>
+    <div class="shape-4"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-label">
+      <span></span>
+      501(c)(3) Nonprofit · Chicago, IL · Est. 2019
+    </div>
+
+    <h1>
+      Education<br>
+      that opens <em>doors.</em><br>
+      <span class="line-teal">Knowledge</span> that<br>
+      builds futures.
+    </h1>
+
+    <p class="hero-sub">
+      Advancing equity in learning through youth mentoring,
+      AI literacy consulting, and curriculum development —
+      grounded in research, aimed at legislative impact.
+    </p>
+
+    <div class="hero-actions">
+      <a href="programs.html" class="btn-main">
+        <i class="ti ti-arrow-right"></i>
+        Explore programs
+      </a>
+      <a href="the-problem.html" class="btn-ghost">
+        Read the research
+        <i class="ti ti-arrow-up-right"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="stats-strip">
+    <div class="stat-item">
+      <span class="stat-n">5+</span>
+      <span class="stat-l">Years operating</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">3</span>
+      <span class="stat-l">Program areas</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">4</span>
+      <span class="stat-l">Consulting services</span>
+    </div>
+    <div class="stat-item">
+      <span class="stat-n">501(c)(3)</span>
+      <span class="stat-l">Nonprofit status</span>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    Scroll to explore
+  </div>
+</section>
+
+<!-- ── MARQUEE ── -->
+<div class="marquee-wrap" aria-hidden="true">
+  <div class="marquee-track">
+    <div class="marquee-item"><div class="marquee-dot"></div>AI Literacy</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Social Capital</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Youth Mentoring</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Faculty Development</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Policy Design</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Equity in Education</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Career Readiness</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Legislative Impact</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Curriculum Development</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Near-Peer Learning</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>AI Literacy</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Social Capital</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Youth Mentoring</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Faculty Development</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Policy Design</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Equity in Education</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Career Readiness</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Legislative Impact</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Curriculum Development</div>
+    <div class="marquee-item"><div class="marquee-dot"></div>Near-Peer Learning</div>
   </div>
 </div>
 
-<section>
-  <p class="section-tag">What we do</p>
-  <h2>Three ways we create impact</h2>
-  <p>From high school hallways to university faculty rooms, Empowered Education meets learners and leaders where they are — and moves them forward.</p>
-  <div class="grid-3">
-    <div class="card">
-      <div class="card-icon" style="background:var(--purple-light);color:var(--purple)"><i class="ti ti-users"></i></div>
-      <div class="accent-bar" style="background:var(--purple)"></div>
-      <h3>Youth pipeline programs</h3>
-      <p>We connect high school seniors with college students and career professionals to build social capital, college readiness, and professional identity — before the first semester begins.</p>
-      <a href="programs.html" style="font-size:13px;color:var(--purple);text-decoration:none;display:block;margin-top:0.75rem">See programs →</a>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:var(--teal-light);color:var(--teal)"><i class="ti ti-brain"></i></div>
-      <div class="accent-bar" style="background:var(--teal)"></div>
-      <h3>AI literacy consulting</h3>
-      <p>We help colleges, universities, and school districts navigate artificial intelligence through faculty training, policy design, disclosure frameworks, and curriculum integration — grounded in equity.</p>
-      <a href="consulting.html" style="font-size:13px;color:var(--teal);text-decoration:none;display:block;margin-top:0.75rem">Work with us →</a>
-    </div>
-    <div class="card">
-      <div class="card-icon" style="background:var(--coral-light);color:var(--coral)"><i class="ti ti-file-certificate"></i></div>
-      <div class="accent-bar" style="background:var(--coral)"></div>
-      <h3>Curriculum products</h3>
-      <p>Practical, equity-centered toolkits, course modules, and policy templates — built for instructors and administrators who need resources they can deploy immediately.</p>
-      <a href="shop.html" style="font-size:13px;color:var(--coral);text-decoration:none;display:block;margin-top:0.75rem">Browse resources →</a>
-    </div>
+<!-- ── THREE PILLARS ── -->
+<div class="pillars">
+  <div class="pillars-header">
+    <h2>Three ways we create impact</h2>
+    <p>From high school hallways to university faculty rooms — we meet learners and leaders where they are.</p>
   </div>
-</section>
 
-<section>
-  <p class="section-tag">Our approach</p>
-  <h2>Social capital is the curriculum no one teaches</h2>
-  <p>The students who struggle most in higher education rarely lack intelligence — they lack access. Access to professionals who look like them. Access to networks that open doors. Access to a faculty member who explains not just the assignment, but the unspoken rules of academic culture.</p>
-  <p>Empowered Education was founded on one conviction: that knowledge about how institutions work — social capital — is as teachable as calculus, and far too rarely taught. Our programs make that knowledge explicit, transferable, and free to every student we serve.</p>
-  <div class="pullquote">
-    <p>"The gap isn't academic preparation. It's the invisible curriculum — who you know, how you present, and whether anyone told you the rules before you walked in the room."</p>
-    <cite>— Theodore L. Barnes, M.S.Ed., Founder</cite>
-  </div>
-</section>
-
-<section>
-  <p class="section-tag">Our reach</p>
-  <h2>Building toward scale</h2>
-  <p>We are growing with intention — deepening our local impact in the Chicago region while building the infrastructure to serve institutions and students nationally and internationally.</p>
-  <div class="stat-row">
-    <div class="stat"><div class="stat-num">5+</div><div class="stat-label">Years as a 501(c)(3)</div></div>
-    <div class="stat"><div class="stat-num">3</div><div class="stat-label">Program areas</div></div>
-    <div class="stat"><div class="stat-num">2</div><div class="stat-label">University connections</div></div>
-    <div class="stat"><div class="stat-num">IL</div><div class="stat-label">Currently serving Chicago region</div></div>
-  </div>
-</section>
-
-<section>
-  <p class="section-tag">Founder</p>
-  <h2>Led by someone who has done the work</h2>
-  <div style="display:flex;gap:1.25rem;align-items:flex-start;flex-wrap:wrap;margin-top:1rem">
-    <div style="width:64px;height:64px;min-width:64px;border-radius:50%;background:var(--purple-light);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:600;color:var(--purple)">TB</div>
-    <div style="flex:1;min-width:200px">
-      <p style="font-size:15px;font-weight:600;color:var(--gray-dark);margin-bottom:2px">Theodore L. Barnes, M.S.Ed.</p>
-      <p style="font-size:13px;color:var(--gray-mid);margin-bottom:0.75rem">Founder &amp; Executive Director · Assistant Professor of Career Development · Published Scholar &amp; Research Scientist · Doctoral Candidate, Loyola University Chicago</p>
-      <div>
-        <span class="pill">AI literacy</span><span class="pill">Higher ed equity</span><span class="pill">Enrollment management</span>
-        <span class="pill">Career development</span><span class="pill">Social work education</span><span class="pill">Antiracist pedagogy</span>
+  <div class="pillars-grid">
+    <a href="programs.html" class="pillar-card purple">
+      <span class="pillar-num">01</span>
+      <div class="pillar-icon" style="background:var(--purple-l);color:var(--purple)">
+        <i class="ti ti-users"></i>
       </div>
+      <h3>Youth Pipeline Programs</h3>
+      <p>Near-peer mentoring, job shadowing, and social capital workshops that give students the invisible curriculum no one else teaches.</p>
+      <div class="pillar-link">Learn more <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a href="consulting.html" class="pillar-card teal">
+      <span class="pillar-num">02</span>
+      <div class="pillar-icon" style="background:var(--teal-l);color:var(--teal)">
+        <i class="ti ti-brain"></i>
+      </div>
+      <h3>AI Literacy Consulting</h3>
+      <p>Faculty training, policy design, disclosure frameworks, and curriculum integration — grounded in equity, built for real classrooms.</p>
+      <div class="pillar-link">Learn more <i class="ti ti-arrow-right"></i></div>
+    </a>
+
+    <a href="shop.html" class="pillar-card coral">
+      <span class="pillar-num">03</span>
+      <div class="pillar-icon" style="background:rgba(194,75,39,0.08);color:var(--coral)">
+        <i class="ti ti-file-certificate"></i>
+      </div>
+      <h3>Curriculum Products</h3>
+      <p>Downloadable toolkits, a full 10-module AI literacy course, and policy templates ready to deploy in any institution immediately.</p>
+      <div class="pillar-link">Browse products <i class="ti ti-arrow-right"></i></div>
+    </a>
+  </div>
+</div>
+
+<!-- ── FOUNDER STRIP ── -->
+<div class="founder-strip">
+  <div class="founder-left">
+    <h2>Led by someone who navigated this system — and decided to change it.</h2>
+    <p>Theodore L. Barnes, M.S.Ed. built Empowered Education from a conviction formed across nearly two decades in higher education — as an enrollment advisor, campus builder, admissions director, faculty member, and research scientist.</p>
+    <div class="founder-creds">
+      <div class="cred-item"><div class="cred-dot"></div>Assistant Professor of Career Development</div>
+      <div class="cred-item"><div class="cred-dot"></div>Doctoral Candidate, Loyola University Chicago</div>
+      <div class="cred-item"><div class="cred-dot"></div>M.S.Ed., Purdue University</div>
+      <div class="cred-item"><div class="cred-dot"></div>Executive Leadership Certificate, UChicago Booth</div>
+      <div class="cred-item"><div class="cred-dot"></div>Race &amp; Equity Certificate, Institute for Racial Justice</div>
+      <div class="cred-item"><div class="cred-dot"></div>Published Scholar &amp; Research Scientist</div>
     </div>
   </div>
-</section>
 
-<section>
-  <p class="section-tag">Who we serve</p>
+  <div class="founder-right">
+    <div class="founder-quote">
+      <p>"I was one of the students who didn't know the rules. I figured out the system piece by piece — through trial and error, through mentors who took a chance on me, and through hard lessons. That experience is the curriculum."</p>
+      <cite>— Theodore L. Barnes, M.S.Ed., Founder</cite>
+    </div>
+    <a href="about.html" class="founder-btn">
+      Full story <i class="ti ti-arrow-right"></i>
+    </a>
+  </div>
+</div>
+
+<!-- ── AUDIENCE ── -->
+<div class="audience">
   <h2>Find your path with us</h2>
-  <div class="grid-3">
-    <a href="programs.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
-      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Students &amp; families</p>
-      <h3 style="margin-top:0">High school and college students</h3>
-      <p>Learn how to apply to our mentoring and workshop programs, and what to expect when you join.</p>
+  <div class="audience-grid">
+    <a href="programs.html" class="aud-card">
+      <span class="aud-label">Students &amp; Families</span>
+      <h3>High school &amp; college students</h3>
+      <p>Apply to our free mentoring programs, workshops, and job shadow experiences — no GPA requirement, just commitment.</p>
+      <div class="aud-arrow"><i class="ti ti-arrow-right"></i></div>
     </a>
-    <a href="consulting.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
-      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Institutions</p>
-      <h3 style="margin-top:0">Colleges, universities &amp; districts</h3>
-      <p>Explore our consulting engagements — AI literacy training, policy design, and faculty development.</p>
+    <a href="consulting.html" class="aud-card">
+      <span class="aud-label">Institutions</span>
+      <h3>Colleges, universities &amp; districts</h3>
+      <p>Bring AI literacy training, policy design, and faculty development to your institution — grounded in research, built for your context.</p>
+      <div class="aud-arrow"><i class="ti ti-arrow-right"></i></div>
     </a>
-    <a href="contact.html" class="card" style="text-decoration:none;display:block;cursor:pointer">
-      <p style="font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.07em;color:var(--gray-mid);margin-bottom:.5rem">Funders &amp; partners</p>
-      <h3 style="margin-top:0">Foundations &amp; grant makers</h3>
-      <p>Review our theory of change and funding priorities — and explore partnership opportunities.</p>
+    <a href="contact.html" class="aud-card">
+      <span class="aud-label">Funders &amp; Partners</span>
+      <h3>Foundations &amp; grant makers</h3>
+      <p>Explore our theory of change, published research, and funding priorities — and join us in building toward legislative impact.</p>
+      <div class="aud-arrow"><i class="ti ti-arrow-right"></i></div>
     </a>
   </div>
-</section>
+</div>
 
-<section style="text-align:center;border-bottom:none">
-  <p class="section-tag" style="text-align:center">Get started</p>
-  <h2 style="margin:0 auto 0.75rem;max-width:440px">Ready to learn, partner, or support?</h2>
-  <p style="margin:0 auto 1.75rem;max-width:440px">Whether you're a student, an institution, or a funder — we want to hear from you.</p>
-  <div class="btn-row" style="justify-content:center">
-    <a href="contact.html" class="btn-primary">Contact us</a>
-    <a href="about.html" class="btn-secondary">Learn about us</a>
+<!-- ── RESEARCH CALLOUT ── -->
+<div class="research-band">
+  <div>
+    <h2>Research-grounded. Impact-oriented.</h2>
+    <p>Every program and product is informed by active scholarship. Our founder is a published co-investigator in empirical research on AI and academic integrity — and his doctoral work at Loyola University Chicago is shaping how we understand the relationship between AI and student intellectual agency.</p>
+    <a href="the-problem.html" class="btn-ghost" style="color:var(--mid);border-color:var(--border)">
+      Read the research foundation <i class="ti ti-arrow-right"></i>
+    </a>
   </div>
-</section>
+  <div class="pub-card">
+    <span class="pub-label">Published 2025 · Co-authored research</span>
+    <div class="pub-title">"Artificial Intelligence and Academic Integrity: Legislate or Educate?"</div>
+    <p class="pub-meta">Wan, G., Hernandes Grassi, M., Golden, T., <strong>Barnes, T.</strong>, et al.<br>
+    <em>Journal of Scholarly Publishing, 56</em>(2), 320–376.</p>
+  </div>
+</div>
 
+<!-- ── CTA ── -->
+<div class="cta-footer">
+  <h2>Ready to learn,<br>partner, or support?</h2>
+  <p>Whether you are a student, an institution, or a funder — we want to hear from you.</p>
+  <div class="cta-btns">
+    <a href="contact.html">Get in touch</a>
+    <a href="about.html">Learn about us</a>
+  </div>
+</div>
+
+<!-- ── FOOTER ── -->
 <footer>
   <div class="footer-inner">
     <div class="footer-brand">
-      <strong style="font-size:15px">Empowered Education</strong>
-      <p>Advancing equity in learning through youth mentoring, AI literacy consulting, and curriculum development.</p>
-      <p style="margin-top:0.5rem;font-size:12px;color:rgba(255,255,255,0.4)">501(c)(3) Nonprofit · Chicago, IL</p>
+      <strong>Empowered Education</strong>
+      <p>Advancing equity in learning through youth mentoring,<br>AI literacy consulting, and curriculum development.<br><br>501(c)(3) Nonprofit · Chicago, Illinois<br>empowerededucate.org</p>
     </div>
     <div class="footer-col">
       <h4>Programs</h4>
@@ -176,6 +1165,36 @@
   </div>
 </footer>
 
-<script src="js/main.js"></script>
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top  = e.clientY + 'px';
+  });
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => cursor.classList.add('hovering'));
+    el.addEventListener('mouseleave', () => cursor.classList.remove('hovering'));
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.pillar-card, .aud-card, .stat-item').forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+    observer.observe(el);
+  });
+</script>
+
 </body>
 </html>
