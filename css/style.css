@@ -459,3 +459,39 @@ cite, .cite { font-size: 11px; color: var(--gray-mid); font-style: italic; }
   mix-blend-mode: screen;
   filter: none; /* override the invert we added before */
 }
+
+/* ── NAV SCROLL BEHAVIOR ── */
+nav.scrolled {
+  background: rgba(245, 242, 234, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 1px 0 rgba(26,25,22,0.08);
+}
+
+/* ── NAV LOGO FIX ── */
+.nav-logo {
+  display: flex;
+  align-items: center;
+}
+
+.nav-logo-img {
+  height: 36px !important;
+  width: auto !important;
+  display: block !important;
+  object-fit: contain;
+  /* white bg logo — looks fine on cream/transparent nav */
+}
+
+/* ── FOOTER LOGO FIX ── */
+.footer-logo-img {
+  height: 50px !important;
+  width: auto !important;
+  mix-blend-mode: screen;
+  filter: none !important;
+  margin-bottom: 0.75rem;
+}
+
+@media (max-width: 768px) {
+  .nav-logo-img { height: 28px !important; }
+  .footer-logo-img { height: 40px !important; }
+}

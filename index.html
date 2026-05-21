@@ -56,7 +56,8 @@
       align-items: center;
       justify-content: space-between;
       padding: 1.25rem 2.5rem;
-      mix-blend-mode: multiply;
+      background: transparent;
+      transition: background 0.3s, box-shadow 0.3s;
     }
 
     .nav-logo {
@@ -1166,6 +1167,16 @@
 </footer>
 
 <script>
+  // Nav background on scroll
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 40) {
+      nav.classList.add('scrolled');
+    } else {
+      nav.classList.remove('scrolled');
+    }
+  });
+
   // Custom cursor
   const cursor = document.getElementById('cursor');
   document.addEventListener('mousemove', e => {
