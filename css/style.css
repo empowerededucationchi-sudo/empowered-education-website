@@ -428,3 +428,34 @@ cite, .cite { font-size: 11px; color: var(--gray-mid); font-style: italic; }
   .stat-row { grid-template-columns: 1fr 1fr; }
   footer { padding: 2rem 1.25rem 1.5rem; }
 }
+
+/* ── LOGO IMAGES ── */
+.nav-logo-img {
+  height: 40px;
+  width: auto;
+  display: block;
+}
+
+.footer-logo-img {
+  height: 60px;
+  width: auto;
+  display: block;
+  margin-bottom: 1rem;
+  /* logo has white bg — add filter for dark footer if needed */
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 768px) {
+  .nav-logo-img {
+    height: 32px;
+  }
+  .footer-logo-img {
+    height: 48px;
+  }
+}
+
+/* Footer logo on dark background — screen blend knocks out white */
+.footer-logo-img {
+  mix-blend-mode: screen;
+  filter: none; /* override the invert we added before */
+}
