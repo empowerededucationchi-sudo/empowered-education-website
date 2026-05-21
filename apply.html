@@ -764,21 +764,36 @@ function submitForm(e, type) {
   const BASE_ID        = window.EE_CONFIG?.baseId || '';
 
   // Map form type to Airtable table name
-  const tableMap = {
-    student:  'Student Applications',
-    mentor:   'Mentor Applications',
-    workshop: 'Workshop Applications',
-    shadow:   'Job Shadow Volunteers',
+  const tableMap = window.EE_CONFIG?.tables || {
+    student:  'Table 1',
+    mentor:   'Table 1',
+    workshop: 'Table 1',
+    shadow:   'Table 1',
   };
 
   const TABLE = tableMap[type];
 
   // Format data as Airtable fields
-  const fields = {};
+  const formLabels = {
+    student:  'Student — Bridge Mentoring',
+    mentor:   'College Mentor',
+    workshop: 'Capital Workshop',
+    shadow:   'Career Professional / Job Shadow',
+  };
+
+  const fields = {
+    'Name': `${data.first_name || ''} ${data.last_name || ''}`.trim(),
+    'Form Type': formLabels[type] || type,
+    'Email': data.email || '',
+    'Phone': data.phone || '',
+    'Submitted At': new Date().toLocaleString('en-US', {timeZone: 'America/Chicago'}),
+  };
+
+  // Add all remaining fields
   for (const [key, val] of Object.entries(data)) {
-    // Convert snake_case to Title Case for Airtable column names
+    if (['first_name','last_name','email','phone','form_type','submitted_at'].includes(key)) continue;
     const fieldName = key.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-    fields[fieldName] = val;
+    if (val && String(val).trim()) fields[fieldName] = val;
   }
 
   if (AIRTABLE_TOKEN !== 'YOUR_AIRTABLE_TOKEN_HERE') {
@@ -797,7 +812,7 @@ function submitForm(e, type) {
         showSuccess(form, btn, success, type, data.email);
       } else {
         btn.disabled = false;
-        btn.textContent = 'Submit application';
+        btn.textContent = btn.getAttribute('data-label') || 'Submit';
         alert('Something went wrong. Please email programs@empowerededucate.org directly.');
         console.error('Airtable error:', result);
       }
